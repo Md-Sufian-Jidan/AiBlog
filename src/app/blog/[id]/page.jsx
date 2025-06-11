@@ -1,5 +1,6 @@
 "use client"
 import { assets, blog_data } from "@/Assets/assets";
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -10,14 +11,13 @@ const BlogPage = () => {
     const id = params?.id;
     const [data, setData] = useState(null);
 
-    const fetchedData = () => {
-        for (let i = 0; i < blog_data.length; i++) {
-            if (Number(id) === blog_data[i].id) {
-                setData(blog_data[i]);
-                console.log(blog_data[i]);
-                break;
+    const fetchedData = async () => {
+        const res = await axios.get(`/api/blog/`, {
+            params: {
+                id
             }
-        }
+        });
+        setData(res.data);
     };
 
     useEffect(() => {
@@ -38,13 +38,15 @@ const BlogPage = () => {
                     <button className="flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 border border-black shadow-[-7px_7px_0px_#000] hover:cursor-pointer">Get Started <Image src={assets.arrow} alt='arrow image' /></button>
 
                 </div>
+                {/* authorImg & name */}
                 <div className="text-center my-24">
                     <h1 className="text-2xl sm:text-xl font-semibold max-w-[700px] mx-auto">{data.title}</h1>
-                    <Image className="mx-auto mt-6 border border-white rounded-full" src={data.author_img} alt="Author Image" width={60} height={60} />
+                    <Image className="mx-auto mt-6 border border-white rounded-full" src={data.authorImg} alt="Author Image" width={60} height={60} />
                     <p className="mt-1 pb-2 text-lg max-w-[740px] mx-auto">{data.author}</p>
 
                 </div>
             </div>
+            {/* main content */}
             <div className="mx-5 max-w-[800px] md:mx-auto mt-[-100px] mb-10">
                 <Image className="border-4 border-white" src={data.image} alt="Blog Image" width={1280} height={720} />
                 <h1 className="my-8 text-[26px] font-semibold">Introduction:</h1>

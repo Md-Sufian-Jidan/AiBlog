@@ -1,7 +1,6 @@
 import { assets, blog_data } from '@/Assets/assets';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 
 const BlogItem = ({ image, category, title, description, id }) => {
     return (

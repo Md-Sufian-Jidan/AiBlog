@@ -8,7 +8,6 @@ const BlogList = () => {
     const [menu, setMenu] = useState("All");
     const [blogs, setBlogs] = useState([]);
     const [category, setCategory] = useState([]);
-    console.log(blogs);
     const fetchBlogs = async () => {
         const res = await axios.get('/api/blog');
         setBlogs(res.data.blogs);
@@ -30,7 +29,7 @@ const BlogList = () => {
             <div className='flex flex-wrap justify-around gap-1 gap-y-10 mb-16 xl:mx-24'>
                 {
                     blogs.filter((item) => menu === "All" ? true : item.category === menu).map((item, idx) => {
-                        return <BlogItem key={idx} image={item?.image} category={item?.category} title={item?.title} description={item?.description} id={item?.id} />
+                        return <BlogItem key={idx} image={item?.image} category={item?.category} title={item?.title} description={item?.description} id={item?._id} />
                     })
                 }
             </div>

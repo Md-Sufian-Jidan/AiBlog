@@ -1,11 +1,22 @@
 "use client"
-import { blog_data } from '@/Assets/assets';
-import React, { useState } from 'react';
+// import { blog_data } from '@/Assets/assets';
+import { useEffect, useState } from 'react';
 import BlogItem from '../BlogItem/BlogItem';
+import axios from 'axios';
 
 const BlogList = () => {
-
     const [menu, setMenu] = useState("All");
+    const [blogs, setBlogs] = useState([]);
+    const [category, setCategory] = useState([]);
+    console.log(blogs);
+    const fetchBlogs = async () => {
+        const res = await axios.get('/api/blog');
+        setBlogs(res.data.blogs);
+    };
+
+    useEffect(() => {
+        fetchBlogs();
+    }, [])
 
     return (
         <div>
@@ -18,7 +29,7 @@ const BlogList = () => {
             {/* map div */}
             <div className='flex flex-wrap justify-around gap-1 gap-y-10 mb-16 xl:mx-24'>
                 {
-                    blog_data.filter((item) => menu === "All" ? true : item.category === menu).map((item, idx) => {
+                    blogs.filter((item) => menu === "All" ? true : item.category === menu).map((item, idx) => {
                         return <BlogItem key={idx} image={item?.image} category={item?.category} title={item?.title} description={item?.description} id={item?.id} />
                     })
                 }

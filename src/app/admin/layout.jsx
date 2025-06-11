@@ -1,6 +1,7 @@
 import { assets } from "@/Assets/assets";
 import Sidebar from "@/Components/Admin/Sidebar";
 import Image from "next/image";
+import { Toaster } from "react-hot-toast";
 
 export default function Layout({ children }) {
     return (
@@ -15,6 +16,10 @@ export default function Layout({ children }) {
                     {children}
                 </div>
             </div>
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+            />
         </>
     )
 }

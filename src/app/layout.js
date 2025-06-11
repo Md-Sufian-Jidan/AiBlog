@@ -1,5 +1,7 @@
 import { Outfit } from "next/font/google";
 import "./globals.css";
+import Footer from "@/Components/Footer/Footer";
+import { Toaster } from "react-hot-toast";
 
 const outfit = Outfit({ subsets: ['latin'], weight: ["400", "500", "600", "700"] })
 
@@ -15,6 +17,11 @@ export default function RootLayout({ children }) {
         className={`${outfit.className} antialiased`}
       >
         {children}
+        <Footer />
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+        />
       </body>
     </html>
   );

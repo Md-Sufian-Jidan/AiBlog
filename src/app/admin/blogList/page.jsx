@@ -3,6 +3,7 @@ import BlogTableItem from '@/Components/Admin/BlogTableItem';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import Swal from 'sweetalert2';
 
 const BlogListPage = () => {
 
@@ -13,13 +14,33 @@ const BlogListPage = () => {
     };
 
     const deleteBlog = async (mongoId) => {
-        const res = await axios.delete('/api/blog', {
-            params: {
-                id: mongoId
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const res = await axios.delete('/api/blog', {
+                    params: {
+                        id: mongoId
+                    }
+                });
+                if (res.data.success) {
+
+                    fetchBlogs();
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Blog has been deleted.",
+                        icon: "success"
+                    });
+                }
             }
         });
-        toast.success(res.data.message);
-        fetchBlogs();
+
     };
 
     useEffect(() => {

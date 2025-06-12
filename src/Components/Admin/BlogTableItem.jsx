@@ -2,7 +2,7 @@ import { assets } from '@/Assets/assets';
 import Image from 'next/image';
 import React from 'react';
 
-const BlogTableItem = ({ authorImg, title, date, author, id, deleteBlog }) => {
+const BlogTableItem = ({ authorImg, title, date, author, _id, deleteBlog }) => {
     const BlogDate = new Date(date);
     return (
         <tr className='bg-white border-b'>
@@ -16,10 +16,9 @@ const BlogTableItem = ({ authorImg, title, date, author, id, deleteBlog }) => {
             <td className='px-6 py-4'>
                 {BlogDate ? BlogDate?.toDateString() : 'No Date'}
             </td>
-            <td onClick={() => deleteBlog(id)} className='px-6 py-4 hover:cursor-pointer'>
+            <td onClick={() => deleteBlog(_id)} className='px-6 py-4 hover:cursor-pointer'>
                 X
             </td>
-
         </tr>
     );
 };

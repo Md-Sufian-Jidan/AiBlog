@@ -26,7 +26,6 @@ const BlogListPage = () => {
         fetchBlogs();
     }, [])
 
-
     return (
         <div className='flex-1 pt-5 px-5 sm:pt-12 sm:pl-16'>
             <h1 className='text-3xl font-semibold'>All Blogs: {blogs?.length}</h1>
@@ -51,14 +50,12 @@ const BlogListPage = () => {
                     <tbody>
                         {
                             blogs.map((blog, idx) => {
-                                return <BlogTableItem key={idx} authorImg={blog?.authorImg} title={blog?.title} date={blog?.date} author={blog?.author}
-                                    id={blog?._id} deleteBlog={deleteBlog} />
+                                return <BlogTableItem key={idx} {...blog} deleteBlog={deleteBlog} />
                             })
                         }
                     </tbody>
 
                 </table>
-
             </div>
         </div>
     );

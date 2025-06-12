@@ -13,10 +13,12 @@ const Header = () => {
         e.preventDefault();
         const formData = new FormData();
         formData.append('email', email);
-        const res = axios.post('/api/email', formData);
+        const res = await axios.post('/api/email', formData);
+
+        console.log(res);
 
         if (res.data?.success) {
-            setEmail('');
+            setEmail("");
             return toast.success(res.data.message);
         }
         else {

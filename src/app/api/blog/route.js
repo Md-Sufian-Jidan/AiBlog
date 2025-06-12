@@ -2,13 +2,11 @@ import { ConnectDB } from "@/lib/config/db";
 import BlogModel from "@/lib/models/BlogModel";
 import { writeFile } from 'fs/promises';
 const fs = require('fs');
-
 const { NextResponse } = require("next/server");
 
 const loadDB = async () => {
     await ConnectDB();
 }
-
 loadDB();
 
 // Api Endpoint For Get all Blogs
